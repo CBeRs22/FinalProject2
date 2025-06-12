@@ -69,7 +69,7 @@ The contract allows people to participate in a decentralized auction using ETH. 
 
 ---
 
-## 5. 👀 Extra Features
+## 5. Extra Features
 
 - `showWinner()`: shows the highest bid and who made it.
 - `showBids()`: shows all bids made.
