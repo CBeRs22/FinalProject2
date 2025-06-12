@@ -1,0 +1,368 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_initialValue",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "AuctionEnded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "endDate",
+						"type": "uint256"
+					}
+				],
+				"name": "AuctionStarted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "EmergencyWithdraw",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "NewBid",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "participant",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "bid",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "bids",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "emergencyWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "endDate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "finalized",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "initialValue",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "myBids",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "last",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "accumulated",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "partialRefund",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "showBids",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "bidder",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Auction.Bid[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "showWinner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawDeposits",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "@notice This contract allows running an auction with minimum incremental bids, refunds, and 2% commission to the owner.",
+			"details": "Uses structs for bid tracking, automatic time extensions, and secure fund handling.",
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"details": "Initializes the auction with configurable duration and starting value",
+					"params": {
+						"_duration": "Duration in seconds",
+						"_initialValue": "Minimum starting value (in wei)"
+					}
+				},
+				"showBids()": {
+					"returns": {
+						"_0": "Array of bids with address and amount"
+					}
+				},
+				"showWinner()": {
+					"returns": {
+						"_0": "Address of the highest bidder"
+					}
+				}
+			},
+			"title": "Transparent Auction with Commission and Partial Refunds",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"AuctionEnded(address,uint256)": {
+					"notice": "Event emitted when auction ends"
+				},
+				"AuctionStarted(uint256)": {
+					"notice": "Event emitted when auction starts"
+				},
+				"EmergencyWithdraw(uint256)": {
+					"notice": "Event emitted if emergency withdrawal is executed"
+				},
+				"NewBid(address,uint256)": {
+					"notice": "Event emitted when a new valid bid is placed"
+				},
+				"Withdraw(address,uint256)": {
+					"notice": "Event emitted when funds are withdrawn"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"bid()": {
+					"notice": "Places a bid; must be 5% higher than the last one."
+				},
+				"emergencyWithdraw()": {
+					"notice": "Emergency withdrawal of remaining funds (only after ending)"
+				},
+				"partialRefund()": {
+					"notice": "Withdraws excess above last bid (while auction is active)"
+				},
+				"showBids()": {
+					"notice": "Complete list of bids"
+				},
+				"showWinner()": {
+					"notice": "Shows current winner"
+				},
+				"withdrawDeposits()": {
+					"notice": "Ends the auction and handles refunds and commission"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"SingAuction.sol": "Auction"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"SingAuction.sol": {
+			"keccak256": "0x6923adfa458bb2a05b44eb80a03e0f7a6558e8c4f68f8961206e6860523d8cc3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://eeab35c8fdbe8b6b4eaf3b13c778c2042c2be6086198e1834f96fa67af64affc",
+				"dweb:/ipfs/QmQyKFE9sTygQtDrKsG4XW5dREdRSS9UMgrDLmDxLU1y95"
+			]
+		}
+	},
+	"version": 1
+}
