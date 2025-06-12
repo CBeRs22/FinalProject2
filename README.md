@@ -1,115 +1,144 @@
-# AUCTION SMART CONTRACT – FINAL PROJECT (Module 2)
+# TRANSPARENT AUCTION SMART CONTRACT WITH COMMISSION
 
-This project is part of the final work for Module 2 of the EthKipu Blockchain Builder program. It is a simple but complete auction contract created with Solidity (version 0.8.20) and deployed on the Sepolia testnet.
-
----
-
-## 1. What it does
-
-The contract allows people to participate in a decentralized auction using ETH. It includes some useful features:
-
-- You can only bid if the auction is active.
-- Each new bid must be at least 5% higher than the last one.
-- If someone bids close to the end, the auction time is extended by 10 minutes.
-- Users who don’t win get 98% of their ETH back automatically.
-- The owner gets a 2% commission from the winner’s bid.
+This project is a complete auction contract created with Solidity (version 0.8.20) that includes partial refunds and owner commission features.
 
 ---
 
-## 2. Main Variables and Structures
+## 1. Features
 
-- `Bid`: a structure with bidder address and amount.
-- `bids`: list of all valid bids.
-- `myBids`: tracks the total and last bid per user.
-- `endDate`: when the auction ends.
-- `owner`: the person who created the auction.
-- `commissionRate`: fixed at 2%.
+The contract implements a transparent auction system with:
+
+- Time-limited auctions with automatic extensions
+- Minimum 5% bid increment requirement
+- Partial refunds for non-winning bidders (98% of their bids)
+- 2% commission automatically sent to the auction owner
+- Emergency withdrawal mechanism
+- Real-time bid tracking and winner information
 
 ---
 
-## 3. Functions
+## 2. Contract Structure
 
-### Constructor
+### Key Variables
+- `Bid`: Structure containing `bidder` address and `amount`
+- `MyBids`: Tracks each user's `last` bid and `accumulated` total
+- `bids`: Array of all bids in chronological order
+- `endDate`: Auction expiration timestamp
+- `initialValue`: Minimum starting bid amount
+- `owner`: Contract creator address
+- `finalized`: Auction completion flag
 
-- Sets who the owner is.
-- Defines how long the auction will last.
+### Commission
+- Fixed 2% commission on all bids
+- Automatically distributed when auction ends
+
+---
+
+## 3. Core Functions
 
 ### `bid()`
+- Submit new bids (must be ≥5% higher than previous)
+- Extends auction by 10 minutes if bid occurs within last 10 minutes
+- Records bid amount and updates user's bid history
 
-- Called when someone wants to make an offer.
-- The first bid must be higher than the initial value.
-- Other bids must be at least 5% more than the current one.
-- Extends time if needed.
-- Records the bid.
-
-### `retDeposit()`
-
-- Ends the auction (only owner).
-- Transfers 98% refund to other users.
-- Sends 2% commission to owner.
-- Marks the auction as ended.
+### `withdrawDeposits()`
+- Owner-only function to finalize auction
+- Distributes:
+  - 98% refunds to all non-winning bidders
+  - 2% commission to owner
+- Marks auction as finalized
 
 ### `partialRefund()`
-
-- Lets users take back extra funds if they overbid more than once.
+- Allows bidders to reclaim excess funds above their last bid
+- Available during active auction period
 
 ### `emergencyWithdraw()`
-
-- Only for the owner.
-- Can take out all ETH after the auction ends (as a backup option).
-
----
-
-## 4. Events
-
-- `NewOffer`: a new valid bid was made.
-- `AuctionEnded`: the auction finished.
-- `PartialRefund`: someone claimed back excess ETH.
-- `EmergencyWithdraw`: owner took out remaining funds.
+- Owner-only safety mechanism
+- Recovers remaining funds after auction ends
 
 ---
 
-## 5. Extra Features
+## 4. View Functions
 
-- `showWinner()`: shows the highest bid and who made it.
-- `showBids()`: shows all bids made.
-- `getTimeRemaining()`: tells how much time is left.
-- `totalBidOf(address)`: shows how much a user has offered.
+### `showWinner()`
+- Returns address of current highest bidder
 
----
-
-## 6. How money moves
-
-- Winner pays → 2% goes to owner.
-- 98% of non-winning bids are refunded.
-- Users can get back their extra ETH before auction ends.
+### `showBids()`
+- Returns complete bid history array
 
 ---
 
-## 7. How to use it
+## 5. Event Logging
 
-1. Deploy the contract with a duration.
-2. Bidders call `bid()` and send ETH.
-3. Once time is up, owner calls `retDeposit()`.
-4. Refunds and commission are sent automatically.
-5. Users can also call `partialRefund()` if needed.
-
----
-
-## 8. Deployment Info
-
-- **Testnet**: Sepolia
-- **Contract Address**: `0x790FD2ECf5eDAb4FCb651A0dCa41f2E4dc673ccC`
-- **Tools used**: Remix + MetaMask
+- `AuctionStarted`: Emitted on contract creation
+- `NewBid`: Recorded for each valid bid
+- `AuctionEnded`: Emitted when finalized
+- `Withdraw`: Logs all refund transactions
+- `EmergencyWithdraw`: Records owner withdrawals
 
 ---
 
-## 9. Made by
+## 6. Business Logic
 
-Created by Cabral Leonel, as a final project for Module 2 in the EthKipu program.
+### Money Flow
+1. Bidders submit increasing bids (minimum +5%)
+2. When auction ends:
+   - Winner pays full last bid amount
+   - Non-winners receive 98% refunds
+   - Owner collects 2% of all bids as commission
+3. Excess funds can be reclaimed during auction
+
+### Time Management
+- Initial duration set at deployment
+- Automatically extends by 10 minutes if late bids arrive
+- All time calculations use blockchain timestamp
+
+---
+
+## 7. Usage Guide
+
+### Deployment
+1. Set constructor parameters:
+   - `_duration`: Auction length in seconds
+   - `_initialValue`: Minimum starting bid in wei
+
+### Participation
+1. Bidders call `bid()` with ETH value
+2. Monitor status with view functions
+3. Claim partial refunds when desired
+
+### Completion
+1. Owner calls `withdrawDeposits()` after endDate
+2. System automatically distributes funds
+3. Owner can recover remaining balance if needed
+
+---
+
+## 8. Technical Details
+
+**Solidity Version:** 0.8.20  
+**License:** MIT  
+**Security Features:**
+- Reentrancy protection
+- Owner-restricted critical functions
+- Automatic time extensions
+- Input validation
+
+---
+
+## 9. Development Info
+
+**Test Environment:**  
+- Remix IDE
+- Ethereum testnets
+
+**Recommended Tools:**
+- MetaMask for interaction
+- Etherscan for verification
+- Hardhat for local testing
 
 ---
 
 ## License
 
-MIT – Feel free to use or improve it.
+MIT License - Free to use, modify and distribute with attribution.
