@@ -116,7 +116,7 @@ The contract implements a transparent auction system with:
 
 ## 8. Technical Details
 
-**Solidity Version:** 0.8.20  
+**Solidity Version:** 0.8.30  
 **License:** MIT  
 **Security Features:**
 - Reentrancy protection
